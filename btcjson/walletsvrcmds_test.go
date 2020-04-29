@@ -256,7 +256,7 @@ func TestWalletSvrCmds(t *testing.T) {
 				return btcjson.NewCmd("getnewaddress")
 			},
 			staticCmd: func() interface{} {
-				return btcjson.NewGetNewAddressCmd(nil)
+				return btcjson.NewGetNewAddressCmd(nil, nil)
 			},
 			marshalled: `{"jsonrpc":"1.0","method":"getnewaddress","params":[],"id":1}`,
 			unmarshalled: &btcjson.GetNewAddressCmd{
@@ -269,7 +269,7 @@ func TestWalletSvrCmds(t *testing.T) {
 				return btcjson.NewCmd("getnewaddress", "acct")
 			},
 			staticCmd: func() interface{} {
-				return btcjson.NewGetNewAddressCmd(btcjson.String("acct"))
+				return btcjson.NewGetNewAddressCmd(btcjson.String("acct"), nil)
 			},
 			marshalled: `{"jsonrpc":"1.0","method":"getnewaddress","params":["acct"],"id":1}`,
 			unmarshalled: &btcjson.GetNewAddressCmd{
