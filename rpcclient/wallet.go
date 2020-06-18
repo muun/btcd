@@ -2414,15 +2414,19 @@ func (r FutureWalletProcessPsbtResult) Receive() (*btcjson.WalletProcessPsbtResu
 // function on the returned instance.
 //
 // See WalletProcessPsbt for the blocking version and more details.
-func (c *Client) WalletProcessPsbtAsync(psbt string) FutureWalletProcessPsbtResult {
-	cmd := btcjson.NewWalletProcessPsbtCmd(psbt)
+func (c *Client) WalletProcessPsbtAsync(
+	psbt string, sign *bool, sighashType *string, bip32Derivs *bool,
+) FutureWalletProcessPsbtResult {
+	cmd := btcjson.NewWalletProcessPsbtCmd(psbt, sign, sighashType, bip32Derivs)
 	return c.sendCmd(cmd)
 }
 
 // WalletProcessPsbt updates a PSBT with input information from our wallet and
 // then signs inputs.
-func (c *Client) WalletProcessPsbt(psbt string) (*btcjson.WalletProcessPsbtResult, error) {
-	return c.WalletProcessPsbtAsync(psbt).Receive()
+func (c *Client) WalletProcessPsbt(
+	psbt string, sign *bool, sighashType *string, bip32Derivs *bool,
+) (*btcjson.WalletProcessPsbtResult, error) {
+	return c.WalletProcessPsbtAsync(psbt, sign, sighashType, bip32Derivs).Receive()
 }
 
 // TODO(davec): Implement

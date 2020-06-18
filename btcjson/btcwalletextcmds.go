@@ -105,6 +105,8 @@ type PsbtInput struct {
 // WalletCreateFundedPsbtCmd command.
 type PsbtOutput map[string]float64
 
+// NewPsbtOutput returns a new instance of a PSBT output to use with the
+// WalletCreateFundedPsbtCmd command.
 func NewPsbtOutput(address string, amount float64) PsbtOutput {
 	out := make(map[string]float64)
 	out[address] = amount
